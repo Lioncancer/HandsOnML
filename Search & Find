@@ -1,0 +1,11 @@
+Ch2.
+
+-np.random.permutation(a) a에 대한 무작위로 섞인 배열
+
+-훈련세트, 테스트세트 분리
+from sklearn.model_selection import train_test_split
+train_set, test_set = train_test_split(housing, test_size = 0.2)
+
+- 0xffffffff 16진수로 1111(2진수) 8개
+
+- lambda 함수 매개변수 : 표현식 위의 함수를 물려받음.
