@@ -2,13 +2,19 @@
 
 Ch2.
 
--np.random.permutation(a) a에 대한 무작위로 섞인 배열
+- np.random.permutation(a) a에 대한 무작위로 섞인 배열
+
+- Hash 의 뜻:
+ 끌어모음, 섞어 정착함
+ 
+- 해시함수 : 임의의 길이의 입력 메시지를 고정된 길이의 출력 값으로 압축시키는 함수. 
 
 -훈련세트, 테스트세트 분리
 from sklearn.model_selection import train_test_split
 train_set, test_set = train_test_split(housing, test_size = 0.2, random_state = 42 )
 
-- 42 숫자의 의미 : '삶, 우주, 그리고 모든 것에 대한 궁극적인 질문의 해답' / 더글러스 애덤스의 소설 '은하수를 여행하는 히치하이커를 위한 안내서' 에서 슈퍼컴퓨터인 Deep Thought이 이 질문에 대해 750만년 동안 계산하여 내놓은 답입니다.
+- 42 숫자의 의미 : '삶, 우주, 그리고 모든 것에 대한 궁극적인 질문의 해답' / 
+ 더글러스 애덤스의 소설 '은하수를 여행하는 히치하이커를 위한 안내서' 에서 슈퍼컴퓨터인 Deep Thought이 이 질문에 대해 750만년 동안 계산하여 내놓은 답입니다.
 
 - 0xffffffff 16진수로 1111(2진수) 8개
 
@@ -16,3 +22,33 @@ train_set, test_set = train_test_split(housing, test_size = 0.2, random_state = 
 
 - DataFrame.set_index() 
  DataFrame에 자동으로 index를 설정하고 원래 있던 index를 index라는 열로 만듬.
+
+- 꼬리가 두꺼운 분포 -> 한쪽 끝이 큰 분포 
+
+- DataFrame.drop("A", axis = 1) -> A column을 빼고 출력, 원본에 영향 x
+
+- SimpleImputer를 통해 빈 데이터를 중간값으로 대체하기.
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(strategy = "median")
+imputer.fit(housing)
+X = imputer.transform(housing_num)
+housing_tr = pd.DataFrame(X, columns=housing_num.columns,
+                          index=housing_num.index)
+                          
+  -> fit_transform(housing_num)와 동일, 더 빠름..
+                          
+- DataFrame.transform(func) -> DataFrame을 해당 function을 적용하여 바꾸어줌.
+
+- 범주형 데이터프레임을 OrdinalEncoder를 이용해 숫자형으로 변환
+from sklearn.preprocessing import OrdinalEncoder
+ordinal_encoder = OrdinalEncoder()
+housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)
+housing_cat_encoded[:10]
+
+
+- array.shape shape함수는 what by what 행렬인지 알려준다.
+
+- 파이프라인:
+ 쉽게 설명하자면 파이프라인이 도입되기 전에는 1명이 하나의 일을 처음부터 끝까지 처리했다면
+ 파이프라인이 도입 이후에는 한가지 작업만 할수있는 사람 여러명을 차례대로 놔두고 하나의 큰 작업을 조그만 작업으로 쪼개서 다음사람에게 순서대로 넘기는 방식으로 실행한다.
+ 이렇게되면 하나의 작업을 1명이 할때 걸리는 시간보다 다음 사람한테 넘기는 시간이 훨씬 짧기 때문에 클럭을 올리기 쉬워지게 되어 특정 조건에서 동작 속도를 크게 올릴 수 있다.
