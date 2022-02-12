@@ -58,3 +58,10 @@ housing_cat_encoded[:10]
 Ch.3 
 
 - 정밀도 precision, 재현율 recall -> 정확성, 다양성(한 데이터에 대한)으로 이해하면 될 것 같다. 
+
+
+22. 02. 12 
+Ch.7
+
+- bagging(bootstrap aggregating) 과 pasting. : 앙상블 기법에 대한 내용으로 훈련세트 중에서 중복을 허용하여 샘플링 하는 방식이 배깅이고, 
+중복을 허용하지 않는 방식이 페이스팅이다. 
